@@ -1718,6 +1718,7 @@ if selected=='Summary':
             threshold=sec1.slider('Choose probability threshold',min_value=0.1,max_value=0.9,step=0.1,value=0.5,key='33333')
             model=LogisticRegression(solver=solver,penalty=penalty,C=C)
         elif m=='Decision Tree':
+            max_depth=sec1.slider('Choose the height of the tree:', min_value=5, max_value=30, value=30 ,key='33')
             left4,right4=sec1.columns(2)
            
             min_samples_split=left4.selectbox('Choose the minimum samples to split a node',[2,5,10,15,20,30,50],key='333')
