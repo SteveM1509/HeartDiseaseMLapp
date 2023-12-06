@@ -1504,7 +1504,7 @@ if selected=='Neural Networks':
                 """)
     
     layers=sec0.slider('Select the number of hidden layers',min_value=1,max_value=20,value=2,step=1,key='00')
-    nodes=sec0.slider('Select the number of nodes per layer', min_value=3, max_value=20,value=5,step=1,key='000')
+    nodes=sec0.slider('Select the number of nodes per hidden layer', min_value=3, max_value=20,value=5,step=1,key='000')
     nn_config=[len(imp_vars)]+([nodes]*layers)+[1]
     network = create_network(nn_config)
     fig=draw_network(network)
@@ -1534,7 +1534,7 @@ if selected=='Neural Networks':
     left,mid,right=sec1.columns(3)
     
     layers=left0.slider('Select the number of hidden layers',min_value=1,max_value=20,value=7,step=1,key='11')
-    nodes=right0.slider('Select the number of nodes per layer', min_value=3, max_value=20,value=7,step=1,key='111')
+    nodes=right0.slider('Select the number of nodes per hidden layer', min_value=3, max_value=20,value=7,step=1,key='111')
     activation=left.selectbox('Select the activation function', ['relu','tanh','logistic','identity'], key='1111')
     solver=mid.selectbox('Select the optimizer',['adam','sgd','lbfgs'], key='11111')
     alpha=right.selectbox('Select the strength of regularization',[0.0001,0.001,0.01,0.1,1,10],key='10')
@@ -1586,7 +1586,7 @@ if selected=='Neural Networks':
     left,mid,right=sec2.columns(3)
     
     layers=left0.slider('Select the number of hidden layers',min_value=1,max_value=20,value=7,step=1,key='22')
-    nodes=right0.slider('Select the number of nodes per layer', min_value=3, max_value=20,value=7,step=1,key='222')
+    nodes=right0.slider('Select the number of nodes per hidden layer', min_value=3, max_value=20,value=7,step=1,key='222')
     activation=left.selectbox('Select the activation function', ['relu','tanh','logistic','identity'], key='2222')
     solver=mid.selectbox('Select the optimizer',['adam','sgd','lbfgs'], key='22222')
     alpha=right.selectbox('Select the strength of regularization',[0.0001,0.001,0.01,0.1,1,10],key='20')
@@ -1643,7 +1643,7 @@ if selected=='Neural Networks':
     left,mid,right=sec3.columns(3)
     
     layers=left0.slider('Select the number of hidden layers',min_value=1,max_value=20,value=7,step=1,key='33')
-    nodes=right0.slider('Select the number of nodes per layer', min_value=3, max_value=20,value=7,step=1,key='333')
+    nodes=right0.slider('Select the number of nodes per hidden layer', min_value=3, max_value=20,value=7,step=1,key='333')
     activation=left.selectbox('Select the activation function', ['relu','tanh','logistic','identity'], key='3333')
     solver=mid.selectbox('Select the optimizer',['adam','sgd','lbfgs'], key='33333')
     alpha=right.selectbox('Select the strength of regularization',[0.0001,0.001,0.01,0.1,1,10],key='30')
@@ -1720,7 +1720,7 @@ if selected=='Summary':
         elif m=='Decision Tree':
             left4,right4=sec1.columns(2)
            
-            min_samples_split=left4.selectbox('Choose the minimum samples to split a leaf node',[2,5,10,15,20,30,50],key='333')
+            min_samples_split=left4.selectbox('Choose the minimum samples to split a node',[2,5,10,15,20,30,50],key='333')
             min_samples_leaves=right4.selectbox('Choose the minimum samples in a leaf node',[1,5,10,15,20,30,50],key='3333')
            
             threshold=sec1.slider('Choose probability threshold',min_value=0.1,max_value=0.9,step=0.1,value=0.5,key='33333')
@@ -1731,7 +1731,7 @@ if selected=='Summary':
             
             left4,mid4,right4=sec1.columns(3)
             
-            min_samples_split=left4.selectbox('Min samples to split a leaf node',[2,5,10,15,20,30,50],key='333')
+            min_samples_split=left4.selectbox('Min samples to split a node',[2,5,10,15,20,30,50],key='333')
             min_samples_leaves=mid4.selectbox('Min samples in a leaf node',[1,5,10,15,20,30,50],key='3333')
             n_estimators=right4.selectbox('Choose the number of estimators',[201,101,51,31,11,1],key='33333')
             
@@ -1757,7 +1757,7 @@ if selected=='Summary':
             left4,right4=sec1.columns(2)
             
             C=left4.selectbox('Choose the regularization parameter:',  [1, 100, 10, 0.1, 0.001], key='33')
-            kernel=right4.selectbox('Select the weights function',['rbf','poly','linear','sigmoid'],key='333')
+            kernel=right4.selectbox('Select the kernel',['rbf','poly','linear','sigmoid'],key='333')
             degree=0
             if kernel=='poly':
                 degree=sec1.slider('Choose the degree of the polynomial',min_value=1,max_value=10,step=1,value=2,key='3333')
@@ -1772,7 +1772,7 @@ if selected=='Summary':
             left5,mid5,right5=sec1.columns(3)
             
             layers=left4.slider('Select the number of hidden layers',min_value=1,max_value=20,value=7,step=1,key='33')
-            nodes=right4.slider('Select the number of nodes per layer', min_value=3, max_value=20,value=7,step=1,key='333')
+            nodes=right4.slider('Select the number of nodes per hidden layer', min_value=3, max_value=20,value=7,step=1,key='333')
             activation=left5.selectbox('Select the activation function', ['relu','tanh','logistic','identity'], key='3333')
             solver=mid5.selectbox('Select the optimizer',['adam','sgd','lbfgs'], key='33333')
             alpha=right5.selectbox('Select the strength of regularization',[0.0001,0.001,0.01,0.1,1,10],key='30')
