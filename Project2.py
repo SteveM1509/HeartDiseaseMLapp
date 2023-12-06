@@ -765,7 +765,7 @@ if selected=='Decision Tree':
     max_depth=sec1.slider('Choose the height of the tree:', min_value=5, max_value=30, value=30 ,key='11')
     
     left,right=sec1.columns(2)
-    min_samples_split=left.selectbox('Choose the minimum samples to split a leaf node',[2,5,10,15,20,30,50],key='111')
+    min_samples_split=left.selectbox('Choose the minimum samples to split a node',[2,5,10,15,20,30,50],key='111')
     min_samples_leaves=right.selectbox('Choose the minimum samples in a leaf node',[1,5,10,15,20,30,50],key='1111')
     
     model=tree.DecisionTreeClassifier(max_depth=max_depth,min_samples_split=min_samples_split,min_samples_leaf=min_samples_leaves)
@@ -815,7 +815,7 @@ if selected=='Decision Tree':
     
     left,right=sec2.columns(2)
     
-    min_samples_split=left.selectbox('Choose the minimum samples to split a leaf node',[2,5,10,15,20,30,50],key='222')
+    min_samples_split=left.selectbox('Choose the minimum samples to split a node',[2,5,10,15,20,30,50],key='222')
     min_samples_leaves=right.selectbox('Choose the minimum samples in a leaf node',[1,5,10,15,20,30,50],key='2222')
     
     model=tree.DecisionTreeClassifier(max_depth=max_depth,min_samples_split=min_samples_split,min_samples_leaf=min_samples_leaves)
@@ -866,7 +866,7 @@ if selected=='Decision Tree':
             
     left,right=sec3.columns(2)
    
-    min_samples_split=left.selectbox('Choose the minimum samples to split a leaf node',[2,5,10,15,20,30,50],key='333')
+    min_samples_split=left.selectbox('Choose the minimum samples to split a node',[2,5,10,15,20,30,50],key='333')
     min_samples_leaves=right.selectbox('Choose the minimum samples in a leaf node',[1,5,10,15,20,30,50],key='3333')
    
     threshold=sec3.slider('Choose probability threshold',min_value=0.1,max_value=0.9,step=0.1,value=0.5,key='33333')
@@ -954,7 +954,7 @@ if selected=='Random Forest':
     left,mid,right=sec1.columns(3)
     
 
-    min_samples_split=left.selectbox('Min samples to split a leaf node',[2,5,10,15,20,30,50],key='111')
+    min_samples_split=left.selectbox('Min samples to split a node',[2,5,10,15,20,30,50],key='111')
     min_samples_leaves=mid.selectbox('Min samples in a leaf node',[1,5,10,15,20,30,50],key='1111')
     n_estimators=right.selectbox('Choose the number of estimators',[201,101,51,31,11,1],key='11111')
     
@@ -1005,7 +1005,7 @@ if selected=='Random Forest':
     
     left,mid,right=sec2.columns(3)
     
-    min_samples_split=left.selectbox('Min samples to split a leaf node',[2,5,10,15,20,30,50],key='222')
+    min_samples_split=left.selectbox('Min samples to split a node',[2,5,10,15,20,30,50],key='222')
     min_samples_leaves=mid.selectbox('Min samples in a leaf node',[1,5,10,15,20,30,50],key='2222')
     n_estimators=right.selectbox('Choose the number of estimators',[201,101,51,31,11,1],key='22222')
     
@@ -1060,7 +1060,7 @@ if selected=='Random Forest':
     
     left,mid,right=sec3.columns(3)
     
-    min_samples_split=left.selectbox('Min samples to split a leaf node',[2,5,10,15,20,30,50],key='333')
+    min_samples_split=left.selectbox('Min samples to split a node',[2,5,10,15,20,30,50],key='333')
     min_samples_leaves=mid.selectbox('Min samples in a leaf node',[1,5,10,15,20,30,50],key='3333')
     n_estimators=right.selectbox('Choose the number of estimators',[201,101,51,31,11,1],key='33333')
     
@@ -1377,7 +1377,7 @@ if selected=='SVM':
     left,right=sec2.columns(2)
     
     C=left.selectbox('Choose the regularization parameter:',  [1, 100, 10, 0.1, 0.001], key='22')
-    kernel=right.selectbox('Select the weights function',['rbf','poly','linear','sigmoid'],key='222')
+    kernel=right.selectbox('Select the kernel',['rbf','poly','linear','sigmoid'],key='222')
     degree=0
     if kernel=='poly':
         degree=sec2.slider('Choose the degree of the polynomial',min_value=1,max_value=10,step=1,value=2,key='2222')
@@ -1430,7 +1430,7 @@ if selected=='SVM':
     left,right=sec3.columns(2)
     
     C=left.selectbox('Choose the regularization parameter:',  [1, 100, 10, 0.1, 0.001], key='33')
-    kernel=right.selectbox('Select the weights function',['rbf','poly','linear','sigmoid'],key='333')
+    kernel=right.selectbox('Select the kernel',['rbf','poly','linear','sigmoid'],key='333')
     degree=0
     if kernel=='poly':
         degree=sec3.slider('Choose the degree of the polynomial',min_value=1,max_value=10,step=1,value=2,key='3333')
