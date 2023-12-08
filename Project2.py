@@ -505,7 +505,7 @@ if selected=='Dimensionality reduction':
                                                         '0': '#85cc18'})
     fig.update_traces(marker_size=12,marker_opacity=0.7, showlegend=True, marker_line=dict(width=1,color='DarkSlateGrey')) 
     fig.update_layout(title_text='UMAP dataset', title_x=0.4, title_font_size= 20, title_y=0.95, height=500, width=800,
-                      xaxis_title='Dimension 1', yaxis_title='Dimension 2')
+                      xaxis_title='Reduced Dimension 1', yaxis_title='Reduced Dimension 2')
     fig.update_layout(legend=dict(title='Truth Labels'))
     
     sec2.plotly_chart(fig)
