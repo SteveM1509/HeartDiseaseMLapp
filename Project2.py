@@ -3,6 +3,8 @@
 Created on Sun Nov 26 22:35:24 2023
 @author: Steve
 """
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 import prince
 import pandas as pd
