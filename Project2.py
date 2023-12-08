@@ -183,7 +183,7 @@ def plot(clf, x, y, prob=False, threshold=None, train=False, Final=False):
     ## Updating overall layout
     ## plot_bgcolor="white",
     fig.update_layout(title_text=title, title_x=0.5, title_font_size= 20, title_y=0.85, height=500, width=900,
-                      xaxis_title='Dimension 1', yaxis_title='Dimension 2')
+                      xaxis_title='Reduced dimension 1', yaxis_title='Reduced dimension 2')
 
     ## Updating legend layout
     fig.update_layout(legend=dict(yanchor="top", xanchor="left", x=-0.3, y=0.975, title='Truth Labels'),
@@ -273,7 +273,7 @@ if selected=='Overview':
                   
                   - **YES!** Please go to this [link to see the EDA](https://heart-disease-project-steve.streamlit.app/)
                   
-                  We have identified 8 different variables as important factors for predicting heart disease. They are:
+                  We have identified 8 different variables as important factors for predicting heart disease from the **EDA app**. They are:
                       
                   **Age, MaxHR, Oldpeak, Sex, ChestPainType, FastingBS, ExerciseAngina, and ST_Slope**
                   
@@ -296,10 +296,25 @@ if selected=='Overview':
                   we are predicting discrete classes (Whether a person has heart disease or not), we are using classification models.
                   """)
     
+    sec1.markdown("""## What is a decision boundary?""")
+    im = Image.open('DB.jpg')
+    sec1.image(im)
+    sec1.markdown("""
+                  - A decision boundary is the line which splits one class from the other. The shape of the decision boundary differs from one
+                  model to another. 
+                  - In image A, the decision boundary is from a linear model. In image B, it is from a non-linear model. In image C, it is from
+                  an overfit model.
+                  - **In the next section, you can see that different models show different areas for predictions. 
+                  The line between these areas is called the decision boundary. 
+                  If an area is red, all points there are classified as red points. If it's green, all points there are classified 
+                  as green points**
+                  """)
+    
     sec1.caption("""
                   Image credits:
                 - [Machine Mantra](https://machinemantra.in/heart-disease-prediction-in-python/)
                 - [Simplilearn](https://www.simplilearn.com/regression-vs-classification-in-machine-learning-article)
+                - [Analytics Vidhya](https://www.analyticsvidhya.com/blog/2017/08/skilltest-logistic-regression/)
                   """)
     
     sec2.write('## Let us look at the different features:')
@@ -591,6 +606,11 @@ if selected=='Logistic Regression':
     f1=f1_score(ytest,ypreds)
     sec1.markdown(strc(acc,prec,recall,f1,'test',hor=True))
     
+    sec1.markdown("""
+                  #### Comments:
+                - Notice that since logistic regression is a linear model, the decision boundary is linear as well!
+                  """)
+    
     ##################################   Probabilities                 ###########################################################
     
     sec2.markdown("""
@@ -649,6 +669,11 @@ if selected=='Logistic Regression':
     recall=recall_score(ytest,ypreds)
     f1=f1_score(ytest,ypreds)
     sec2.markdown(strc(acc,prec,recall,f1,'test',hor=True))
+    
+    sec2.markdown("""
+                  #### Comments:
+                - Notice that there are different probabilities of a person having heart disease. It is not really just 1 and 0!
+                  """)
     
     #############################################    Precision - Recall ##########################################
     
@@ -710,6 +735,12 @@ if selected=='Logistic Regression':
     fig=sns.heatmap(confusion_matrix(ytest,ypreds),annot=True,cmap='viridis',fmt='.0f', annot_kws={'size': 20})
     fig.set(ylabel='True labels', xlabel='Predictions', title='Confusion matrix')
     right2.pyplot()
+    
+    sec3.markdown("""
+                  #### Comments:
+                  - Notice that when the threshold is high, the red region is very small! When the threshold is
+                  low, the opposite happens.
+                  """)
     
 if selected=='Decision Tree':
     
@@ -791,6 +822,11 @@ if selected=='Decision Tree':
     recall=recall_score(ytest,ypreds)
     f1=f1_score(ytest,ypreds)
     sec1.markdown(strc(acc,prec,recall,f1,'test',hor=True))
+    sec1.markdown("""
+                  #### Comments:
+                - Decision trees are prone to overfitting. Notice the incredibly complex decision areas! Reduce the height of the tree 
+                      (to somewhere around 7) to reduce overfitting or try other hyperparameters!
+                  """)
     
     
     ##################################   Probabilities                 ###########################################################
@@ -840,6 +876,12 @@ if selected=='Decision Tree':
     recall=recall_score(ytest,ypreds)
     f1=f1_score(ytest,ypreds)
     sec2.markdown(strc(acc,prec,recall,f1,'test',hor=True))
+    
+    sec2.markdown("""
+                  #### Comments:
+                - See that decision trees do not have varying probabilities since the conditions to split the classes are concrete (meaning it
+                  either belongs to a class or not, there is no in between)!
+                  """)
     
     #############################################    Precision - Recall ##########################################
     
@@ -891,6 +933,11 @@ if selected=='Decision Tree':
     fig=sns.heatmap(confusion_matrix(ytest,ypreds),annot=True,cmap='viridis',fmt='.0f', annot_kws={'size': 20})
     fig.set(ylabel='True labels', xlabel='Predictions', title='Confusion Matrix')
     right2.pyplot()
+    sec3.markdown("""
+                  #### Comments:
+                - See that changing the thresholds do not change the outcomes that much because decision trees are not very good with
+                assigning probability!
+                  """)
     
 if selected=='Random Forest':
     sec0,sec1,sec2,sec3 = st.tabs(['Overview','Predictions','Probabilities','Precision-Recall tradeoff'])
@@ -983,6 +1030,12 @@ if selected=='Random Forest':
     f1=f1_score(ytest,ypreds)
     sec1.markdown(strc(acc,prec,recall,f1,'test',hor=True))
     
+    sec1.markdown("""
+                  #### Comments:
+                - Random forests solve overfitting by utilizing multiple decision trees trained on different subsets of the data. **Still**,
+                there is a possibility of overfitting. If the decision areas are too complex, try changing the model hyperparameters!
+                  """)
+    
     ##################################   Probabilities                 ###########################################################
     
     sec2.markdown("""
@@ -1032,6 +1085,13 @@ if selected=='Random Forest':
     recall=recall_score(ytest,ypreds)
     f1=f1_score(ytest,ypreds)
     sec2.markdown(strc(acc,prec,recall,f1,'test',hor=True))
+    
+    sec2.markdown("""
+                  #### Comments:
+                - **If decision trees don't have proper probabilities, why do Random Forests have probabilities?** This is because random
+                forests use the number of trees that agree as a probability measure.
+                - If all the trees output 1 as the result, a higher probability is assigned to it. If not, the probability is lowered
+                  """)
     
     #############################################    Precision - Recall ##########################################
     
@@ -1088,6 +1148,12 @@ if selected=='Random Forest':
     fig=sns.heatmap(confusion_matrix(ytest,ypreds),annot=True,cmap='viridis',fmt='.0f', annot_kws={'size': 20})
     fig.set(ylabel='True labels', xlabel='Predictions', title='Confusion Matrix')
     right2.pyplot()
+    
+    sec3.markdown("""
+                  #### Comments:
+                - See the red region expand as the threshold decreases. The model predicts a person has heart disease even if it is a bit
+                suspicious!
+                  """)
     
 if selected=='KNN Classifier':
     sec0,sec1,sec2,sec3 = st.tabs(['Overview','Predictions','Probabilities','Precision-Recall tradeoff'])
@@ -1170,6 +1236,14 @@ if selected=='KNN Classifier':
     recall=recall_score(ytest,ypreds)
     f1=f1_score(ytest,ypreds)
     sec1.markdown(strc(acc,prec,recall,f1,'test',hor=True))
+    
+    sec1.markdown("""
+                  #### Comments:
+                - Here is our first non-linear model. Observe that the decision boundary is not a straight line. This is helpful for 
+                complicated datasets!
+                - Notice that as you increase the number of neighbors, the model does not overfit. Increasing it too much might cause
+                underfitting!
+                  """)
     
     ##################################   Probabilities                 ###########################################################
     
@@ -1274,6 +1348,11 @@ if selected=='KNN Classifier':
     fig=sns.heatmap(confusion_matrix(ytest,ypreds),annot=True,cmap='viridis',fmt='.0f', annot_kws={'size': 20})
     fig.set(ylabel='True labels', xlabel='Predictions',title='Confusion Matrix')
     right2.pyplot()
+    sec3.markdown("""
+                  #### Comments:
+                - Notice that as you reduce the threshold, the red area increases since the model is suspicious and predicts most people as
+                having heart disease!
+                  """)
     
 if selected=='SVM':
     
@@ -1355,6 +1434,11 @@ if selected=='SVM':
     recall=recall_score(ytest,ypreds)
     f1=f1_score(ytest,ypreds)
     sec1.markdown(strc(acc,prec,recall,f1,'test',hor=True))
+    sec1.markdown("""
+                  #### Comments:
+                - Choose different kernels to visualize their decision boundaries!
+                - A polynomial kernel with degree 1 is a straight line whereas a polynomial kernel with degree 2 is a curve
+                  """)
     
     ##################################   Probabilities                 ###########################################################
     
@@ -1405,6 +1489,12 @@ if selected=='SVM':
     recall=recall_score(ytest,ypreds)
     f1=f1_score(ytest,ypreds)
     sec2.markdown(strc(acc,prec,recall,f1,'test',hor=True))
+    sec2.markdown("""
+                  #### Comments:
+                - Observe that for a RBF kernel, there are patches or concentric circles with different probabilities just like a 
+                multivariate gaussian model
+                - It looks like multiple gaussians are placed on top of the plots in 3d and projected onto the plot
+                  """)
     
     #############################################    Precision - Recall ##########################################
     
@@ -1459,6 +1549,11 @@ if selected=='SVM':
     fig=sns.heatmap(confusion_matrix(ytest,ypreds),annot=True,cmap='viridis',fmt='.0f', annot_kws={'size': 20})
     fig.set(ylabel='True labels', xlabel='Predictions',title='Confusion Matrix')
     right2.pyplot()
+    sec3.markdown("""
+                  #### Comments:
+                - Observe that the red area is smaller for higher thresholds. The model becomes very strict with its predictions and flags 
+                only high risk users
+                  """)
     
 if selected=='Neural Networks':
     
@@ -1562,6 +1657,11 @@ if selected=='Neural Networks':
     recall=recall_score(ytest,ypreds)
     f1=f1_score(ytest,ypreds)
     sec1.markdown(strc(acc,prec,recall,f1,'test',hor=True))
+    sec1.markdown("""
+                  #### Comments:
+                - Change the number of nodes and layers and see the boundaries! Depending on your selection, the decision boundary might or 
+                might not be linear.
+                  """)
     
     ##################################   Probabilities                 ###########################################################
     
@@ -1614,6 +1714,11 @@ if selected=='Neural Networks':
     recall=recall_score(ytest,ypreds)
     f1=f1_score(ytest,ypreds)
     sec2.markdown(strc(acc,prec,recall,f1,'test',hor=True))
+    sec2.markdown("""
+                  #### Comments:
+                - Sometimes, the neural network might be stuck at a local minima (Think of it as not having an optimized solution to the problem).
+                In that case, it might predict everything as 1 or 0. Pay attention to the scale of the probabilities!
+                  """)
     
     #############################################    Precision - Recall ##########################################
     
@@ -1673,6 +1778,12 @@ if selected=='Neural Networks':
     ax=sns.heatmap(confusion_matrix(ytest,ypreds),annot=True,cmap='viridis',fmt='.0f', annot_kws={'size': 20})
     ax.set(ylabel='True labels', xlabel='Predictions',title='Confusion Matrix')
     right2.pyplot(fig2)
+    sec3.markdown("""
+                  #### Comments:
+                - See that changing the probability changes the precision and recall to a great extent!
+                - Observe that Recall can be 100% if everything is predicted as 1, but precision can not be 100% if everything is 
+                predicted as 0
+                  """)
     
 if selected=='Summary':
     gender_map = {'Male':'M','Female':'F'}
@@ -1832,6 +1943,14 @@ if selected=='Summary':
         sec1.write('#### :green[A person with these attributes is predicted NOT to have heart disease!]')
     elif pred[0][0]==1:
         sec1.write('#### :red[A person with these attributes is predicted to have heart disease!]')
+    
+    sec1.markdown("""
+                  #### Comments:
+                - **DO YOU THINK THERE IS A PROBLEM WITH INTERPRETATION ONCE WE REDUCE DIMENSIONS?** Not quite! Take a look at the plot above!
+                - Other than making predictions, play with the input features to see where the point moves as each feature is changed. 
+                - Observe how much it moves. See changing what features move it across the decision boundary! We can still see 
+                the effect of the variables in an indirect way!
+                  """)
         
     
     sec2.markdown("""
@@ -1870,5 +1989,4 @@ if selected=='Summary':
     
     
     
-
 
