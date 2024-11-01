@@ -30,7 +30,7 @@ from NN import draw_network, create_network
 from sklearn.metrics import confusion_matrix
 from PIL import Image
 
-st.set_option('deprecation.showPyplotGlobalUse', False)
+#st.set_option('deprecation.showPyplotGlobalUse', False)
 st.set_page_config(layout="wide")
 
 df=pd.read_csv('heart.csv')
